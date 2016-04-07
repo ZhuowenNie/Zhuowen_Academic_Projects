@@ -1,0 +1,62 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<%@include file="/static/include/head.jsp"%>
+	
+	<script type="text/javascript">
+		function oper_save() {
+			if($('[name="old_password"]').val()=='') {
+				Alert('请输入原始密码');
+				return false;
+			}
+			if($('[name="new_password"]').val()=='') {
+				Alert('请输入新密码');
+				return false;
+			}
+			if($('[name="new_password2"]').val()=='') {
+				Alert('请输入重复密码');
+				return false;
+			}
+			form1.action = "user/save_pwd.htm";
+			form1.submit();
+			return true;
+		}
+	</script>
+
+</head>
+<body>
+
+	<form name="form1" action="" method="post" class="form-horizontal" role="form" >
+		<input type="hidden" name="id" value="${model.userid}" />
+		<table class="table">
+			<% // 列表头部 %>
+		<tr>
+			<td>原始密码</td>
+			<td>
+			<input class="form-control" type="password" name="old_password" value="" required='required' />
+			</td>
+		</tr>
+		<tr>
+			<td>新密码</td>
+			<td>
+			<input class="form-control" type="password" name="new_password" value="" required='required'  />
+			</td>
+		</tr>
+		<tr>
+			<td>重复密码</td>
+			<td>
+			<input class="form-control" type="password" name="new_password2" value="" required='required'  />
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+			<button class="btn btn-default" onclick="return oper_save();">保 存</button>
+			<button class="btn btn-default" onclick="closeIframe();return false;">关 闭</button>
+			</td>
+		</tr>
+		</table>
+	</form>
+
+</body>

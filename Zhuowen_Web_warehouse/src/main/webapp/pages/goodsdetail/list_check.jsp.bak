@@ -1,0 +1,61 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<%@include file="/static/include/head.jsp"%>
+
+</head>
+<body>
+
+	<form name="form1" action="" method="post" class="form-inline" >
+		<input class="form-control" type="hidden" name="attr['type']" value="${attr.type}"  />
+		
+		<!-- 数据列表 -->
+		<table class="table table-striped table-bordered table-hover">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<%  // 列表头部 %>
+					<th>类型</th> 
+					<th>物资</th> 
+					<th>单位</th> 
+					<th>数量</th> 
+					<th>经手人</th> 
+					<th>说明</th> 
+					<th>时间</th> 
+				</tr>
+			</thead>
+			<c:forEach items="${requestScope.list}" var="item" varStatus="row">
+				<tbody>
+					<tr>
+						<td width="50">${row.count }</td>
+						<%  // 列表内容 %>
+					<th>${item.type==2?'出库':'入库'}</th>
+					<td>${item.goodsName}</td> 
+					<td>${item.companyName}</td> 
+					<td>${item.oper_count}</td> 
+					<td>${item.operName}</td> 
+					<td title="${item.content}">
+					<c:choose>
+						<c:when test="${fn:length(item.content) > 6}">
+								${fn:substring(item.content, 0, 6)}...
+						</c:when>
+						<c:otherwise>
+								${item.content}
+						</c:otherwise>
+					</c:choose>
+					</td> 
+					<td>${item.create_time}</td>
+					</tr>
+				</tbody>
+			</c:forEach>
+			<tr>
+				<td colspan="8" align="center">
+				<button class="btn btn-default" onclick="closeIframe();">关 闭</button>
+				</td>
+			</tr>
+		</table>
+		
+	</form>
+</body>
+</html>
